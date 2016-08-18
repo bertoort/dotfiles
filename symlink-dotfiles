@@ -1,0 +1,10 @@
+#!/bin/bash
+
+DOTFILES=(.gitconfig .gitignore .zshrc .vimrc .aliases)
+
+#Remove old dotfiles and replace them
+for dotfile in $(echo ${DOTFILES[*]});
+do
+    sudo rm -rf ~/$(echo $dotfile)
+    ln -s ~/dotfiles/$(echo $dotfile) ~/$(echo $dotfile)
+done

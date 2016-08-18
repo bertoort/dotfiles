@@ -1,0 +1,17 @@
+# This is Git's per-user configuration file.
+[user]
+	name = Roberto Ortega
+	email = berto.ort@gmail.com
+	username = berto
+[core]
+	editor = /usr/bin/vim
+[alias]
+	co = checkout
+        cob = checkout -b
+	c = commit
+        cm = commit -m
+	cam = commit -am
+        st = status
+	br = branch
+        s = status -s
+	lg = "log --oneline --decorate --all --"

@@ -1,0 +1,8 @@
+function mkcd () {
+    mkdir $1
+    cd $1
+}
+
+alias zshrc="vim ~/.zshrc"
+alias vimrc="vim ~/.vimrc"
+alias copykey="pbcopy < ~/.ssh/id_rsa.pub"

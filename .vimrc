@@ -15,6 +15,9 @@ set guifont=Menlo\ for\ Powerline
 filetype off                  " required
 filetype plugin indent on
 autocmd VimEnter * NERDTree
+set tabstop=4
+set shiftwidth=4
+set expandtab
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -33,9 +36,20 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/powerline'
+Plugin 'osyo-manga/vim-over'
+Plugin 'scrooloose/nerdcommenter'
+
+" Commenting
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDDefaultAlign = 'left'
+let g:NERDAltDelims_java = 1
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " Snippet configuration.
-let g:UltiSnipsExpandTrigger="<s-enter>"
+let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardtrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
@@ -122,14 +136,6 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 nnoremap <leader>sc :set spell spelllang=en_us<CR>
 nnoremap <leader>so :set nospell<CR>
 
-"Clipboard
-nnoremap <leader>y :<C-u>exec 'normal ' . v:count1 . '"+yy'<CR>
-vnoremap <leader>y "+y
-nnoremap <leader>p :<C-u>exec 'normal ' . v:count1 . '"+p'<CR>
-vnoremap <leader>p "+p
-nnoremap <leader>d :<C-u>exec 'normal ' . v:count1 . '"+dd'<CR>
-vnoremap <leader>d "+d 
-
 "Productivity
 inoremap jj <ESC>
 noremap <leader>s :w<CR>
@@ -137,8 +143,11 @@ nnoremap <leader>w :wq<CR>
 nnoremap <leader>fq :q!<CR>
 nnoremap <leader>u <C-r>
 nnoremap <leader>o :noh<CR>
+nnoremap <leader>F :grep -R  .<Left><Left>
+nnoremap <leader>f :/\c
 nnoremap <leader>v :e $MYVIMRC<CR>
-nnoremap <leader>x :E<CR>
+nnoremap <leader>d :/<c-r><c-w><CR>N
+nnoremap <leader>br :bufdo e!<CR>
 nnoremap <C-b> :b#<CR>
 
 "Moving lines

@@ -1,6 +1,6 @@
 # ZSH Configuration
 
-export ZSH=/Users/bertoort/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 DISABLE_AUTO_UPDATE="true"
 export UPDATE_ZSH_DAYS=13

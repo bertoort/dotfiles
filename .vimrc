@@ -18,6 +18,12 @@ autocmd VimEnter * NERDTree
 set tabstop=4
 set shiftwidth=4
 set expandtab
+set noswapfile               
+set nobackup                 
+set splitright               
+set splitbelow               
+set clipboard^=unnamed
+set clipboard^=unnamedplus
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -38,6 +44,9 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Lokaltog/powerline'
 Plugin 'osyo-manga/vim-over'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'tpope/vim-surround'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
 
 " Commenting
 let g:NERDSpaceDelims = 1
@@ -53,6 +62,10 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardtrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
+
+" JavaScript
+let g:jsx_ext_required = 0
+let g:jsx_pragma_required = 1
 
 " Go Bindings
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
@@ -129,6 +142,9 @@ function! VisualFindAndReplaceWithSelection() range
         :'<,'>OverCommandLine s/
 endfunction
 
+" find and replace current word
+nnoremap <leader>d :s/<c-r><c-w>/
+
 nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
@@ -141,18 +157,43 @@ inoremap jj <ESC>
 noremap <leader>s :w<CR>
 nnoremap <leader>w :wq<CR>
 nnoremap <leader>fq :q!<CR>
+nnoremap <leader>q :xa<CR>
 nnoremap <leader>u <C-r>
 nnoremap <leader>o :noh<CR>
 nnoremap <leader>F :grep -R  .<Left><Left>
 nnoremap <leader>f :/\c
 nnoremap <leader>v :e $MYVIMRC<CR>
-nnoremap <leader>d :/<c-r><c-w><CR>N
-nnoremap <leader>br :bufdo e!<CR>
 nnoremap <C-b> :b#<CR>
+nnoremap <C-d> D 
+nnoremap D vec
+
+" Rebuffer
+nnoremap <leader>br :bufdo e!<CR>
+
+" Quick Left and Right
+nnoremap <C-h> ^
+nnoremap <C-l> $
+
+" Easy toggling
+nnoremap <leader>\ :NERDTreeToggle<CR>
+
+" Center n
+nnoremap n nzzzv
+nnoremap N Nzzzv
 
 "Moving lines
-nnoremap <C-j> :m .+1<CR>
-nnoremap <C-k> :m .-2<CR>
+nnoremap <C-j> J 
+nnoremap <S-j> :m .+1<CR>
+nnoremap <S-k> :m .-2<CR>
+
+"Reload Vim
+nnoremap <leader>so :so ~/.vimrc<CR>
+
+"Window Resize
+nnoremap <leader>mh :vertical resize +5<CR>
+nnoremap <leader>ml :vertical resize -5<CR>
+nnoremap <leader>mj :resize +5<CR>
+nnoremap <leader>mk :resize -5<CR>
 
 "Bottom bar settings
 set noruler

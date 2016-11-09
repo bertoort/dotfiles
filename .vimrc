@@ -15,8 +15,8 @@ set guifont=Menlo\ for\ Powerline
 filetype off                  " required
 filetype plugin indent on
 autocmd VimEnter * NERDTree
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set expandtab
 set noswapfile               
 set nobackup                 
@@ -40,8 +40,6 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'scrooloose/nerdtree'
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/powerline'
 Plugin 'osyo-manga/vim-over'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
@@ -110,10 +108,10 @@ set term=xterm-256color
 set termencoding=utf-8
 
 if has("gui_running")
- let s:uname = system("uname")
- if s:uname == "Darwin\n"
-  set guifont=Inconsolata\ for\ Powerline:h15
- endif
+  let s:uname = system("uname")
+  if s:uname == "Darwin\n"
+    set guifont=Inconsolata\ for\ Powerline:h15
+  endif
 endif
 
 " Download font from https://github.com/powerline/fonts/
@@ -136,14 +134,11 @@ inoremap  <right> <nop>
 
 " find and replace
 function! VisualFindAndReplace()
-    :OverCommandLine%s/
+  :OverCommandLine%s/
 endfunction
 function! VisualFindAndReplaceWithSelection() range
-        :'<,'>OverCommandLine s/
+  :'<,'>OverCommandLine s/
 endfunction
-
-" find and replace current word
-nnoremap <leader>d :s/<c-r><c-w>/
 
 nnoremap <Leader>fr :call VisualFindAndReplace()<CR>
 xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
@@ -154,6 +149,7 @@ nnoremap <leader>so :set nospell<CR>
 
 "Productivity
 inoremap jj <ESC>
+nnoremap d "_d
 noremap <leader>s :w<CR>
 nnoremap <leader>w :wq<CR>
 nnoremap <leader>fq :q!<CR>
@@ -164,8 +160,7 @@ nnoremap <leader>F :grep -R  .<Left><Left>
 nnoremap <leader>f :/\c
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <C-b> :b#<CR>
-nnoremap <C-d> D 
-nnoremap D vec
+nnoremap <leader>gg gg=G``<CR>
 
 " Rebuffer
 nnoremap <leader>br :bufdo e!<CR>
@@ -180,11 +175,6 @@ nnoremap <leader>\ :NERDTreeToggle<CR>
 " Center n
 nnoremap n nzzzv
 nnoremap N Nzzzv
-
-"Moving lines
-nnoremap <C-j> J 
-nnoremap <S-j> :m .+1<CR>
-nnoremap <S-k> :m .-2<CR>
 
 "Reload Vim
 nnoremap <leader>so :so ~/.vimrc<CR>

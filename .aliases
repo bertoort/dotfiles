@@ -8,5 +8,5 @@ alias zshrc="vim ~/.zshrc"
 alias vimrc="vim ~/.vimrc"
 alias copykey="pbcopy < ~/.ssh/id_rsa.pub"
 alias pgstart="pkill postgres && postgres -D /usr/local/var/postgres"
-alias godir="cd ~/workspace/go/src/github.com/berto"
+alias godir="cd ~/go/src/github.com/berto"
 

@@ -15,7 +15,7 @@ source $ZSH/oh-my-zsh.sh
 LSCOLORS=dxfxcxdxbxegedabagacad
 
 # go
-export GOPATH=$HOME/workspace/go
+export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
@@ -36,7 +36,7 @@ source ~/.aliases
 # move $HOME/bin to /usr/local/bin and clean up
 # brew install coreutils
 # ln -s /usr/local/bin/gshuf /usr/local/bin/shuf
-fortune | pokemonthink -n
+fortune | pokemonsay -n
 
 # private
 source ~/.profile

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES=(.gitconfig .gitignore .zshrc .vimrc .aliases .tmux.conf .hushlogin)
+DOTFILES=(.gitconfig .gitignore .zshrc .vimrc .aliases .tmux.conf .udraw)
 
 #Remove old dotfiles and replace them
 for dotfile in $(echo ${DOTFILES[*]});

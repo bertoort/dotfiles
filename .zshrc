@@ -41,3 +41,6 @@ bash ~/.udraw/random.sh
 
 # private
 source ~/.profile
+
+# Haskell executables
+PATH=$PATH:$HOME/Library/Haskell/bin

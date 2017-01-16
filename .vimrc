@@ -1,3 +1,10 @@
+" Installation
+" brew install vim cmake
+" YouCompleteMe is annoying
+" " cd ~/.vim/bundle/YouCompleteMe
+" " ./install.py
+
+" VUNDLE
 " " Plugin Brief help
 " " :PluginList       - lists configured plugins
 " " :PluginInstall    - installs plugins; append `!` to update or just
@@ -24,6 +31,7 @@ set splitright
 set splitbelow               
 set clipboard^=unnamed
 set clipboard^=unnamedplus
+set wrap!
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -47,6 +55,8 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tpope/vim-surround'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'tpope/vim-fugitive'
+Plugin 'flazz/vim-colorschemes'
 
 " Commenting
 let g:NERDSpaceDelims = 1
@@ -76,25 +86,26 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
-let g:go_fmt_fail_silently = 1
+let g:go_fmt_fail_silently = 0
 let g:go_play_open_browser = 0
 
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>ds <Plug>(go-def-split)
 au FileType go nmap <Leader>dv <Plug>(go-def-vertical)
 au FileType go nmap <Leader>dt <Plug>(go-def-tab)
-au FileType go nmap <Leader>gd <Plug>(go-doc)
 au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
 au FileType go nmap <Leader>e <Plug>(go-rename)
 
 " Color Theme
 syntax enable
-colorscheme solarized
+colorscheme paperColor
+" colorscheme molokai
+" colorscheme 1989
+" colorscheme benokai
+" colorscheme solarized
 let g:solarized_termcolors = &t_Co
-let g:solarized_termtrans = 1
 let g:solarized_termcolors=256
 let g:solarized_visibility = "high"
 let g:solarized_contrast = "high"
@@ -163,6 +174,14 @@ nnoremap <leader>f :/\c
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <C-b> :b#<CR>
 nnoremap <leader>gg gg=G``<CR>
+nnoremap <leader>a ggVGy``
+
+" Git
+nnoremap <leader>GS :Git status<CR>
+nnoremap <leader>GA :Git add -A<CR>
+nnoremap <leader>GD :Git diff<CR> 
+nnoremap <leader>GC :Git commit -m ""<Left>
+nnoremap <leader>GP :Git push 
 
 " Rebuffer
 nnoremap <leader>br :bufdo e!<CR>
@@ -178,16 +197,28 @@ nnoremap <leader>\ :NERDTreeToggle<CR>
 nnoremap n nzzzv
 nnoremap N Nzzzv
 
-"Reload Vim
+" Reload Vim
 nnoremap <leader>so :so ~/.vimrc<CR>
 
-"Window Resize
+" Window Resize
 nnoremap <leader>mh :vertical resize +5<CR>
 nnoremap <leader>ml :vertical resize -5<CR>
 nnoremap <leader>mj :resize +5<CR>
 nnoremap <leader>mk :resize -5<CR>
 
+" Style
+function! ToggleDark()
+  if &background == "dark"
+    set background=light
+  else
+    set background=dark
+  endif
+endfunction
+
+nnoremap <leader>tt :call ToggleDark()<CR>
+
 "Bottom bar settings
 set noruler
 set laststatus=2
 set statusline=%<\ %f\ %m%y%=%-35.(Line:\ %l\ of\ %L,\ Col:\ %c%V\ (%P)%)
+

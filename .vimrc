@@ -8,8 +8,7 @@
 " " Plugin Brief help
 " " :PluginList       - lists configured plugins
 " " :PluginInstall    - installs plugins; append `!` to update or just
-" " :PluginUpdate
-" " :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" " :PluginUpdate " " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " " :PluginClean      - confirms removal of unused plugins; append `!` to
 
 " Main Configuration
@@ -32,6 +31,7 @@ set splitbelow
 set clipboard^=unnamed
 set clipboard^=unnamedplus
 set wrap!
+" set spell spelllang=en_us
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -57,13 +57,17 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'tpope/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'ianks/vim-tsx'
 
 " Commenting
 let g:NERDSpaceDelims = 1
 let g:NERDCompactSexyComs = 1
 let g:NERDDefaultAlign = 'left'
-let g:NERDAltDelims_java = 1
-let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+let g:NERDCustomDelimiters = { 
+  \    'jsx': { 'left': '{/*','right': '*/}' }, 
+  \    'typescript.tsx': { 'left': '{/*','right': '*/}' } 
+  \  }
 let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 
@@ -73,9 +77,26 @@ let g:UltiSnipsJumpForwardtrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
+" Add snippets inside a snippets file
+" .vim/bundle/vim-snippets/UltiSnips/html.snippets 
+"snippet html "HTML layout" w
+"<!DOCTYPE html>
+"<html>
+"	<head>
+"		<meta charset="utf-8">
+"		<title>${0:${VISUAL}}</title>
+"	</head>
+"	<body>
+"		
+"	</body>
+"</html>
+"endsnippet
+
 " JavaScript
-let g:jsx_ext_required = 0
+" let g:jsx_ext_required = 0
 let g:jsx_pragma_required = 1
+autocmd BufRead,BufNewFile *.tsx setlocal filetype=typescript.tsx
+autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
 
 " Go Bindings
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim
@@ -132,8 +153,8 @@ endif
 " Find
 let g:ctrlp_map = '<c-p>' 
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_user_command = 'find %s -type f'        
-let g:ctrlp_custom_ignore = 'bin$\|build$\|node_modules$\|.git|.bak|.swp|.pyc|.class'
+let g:ctrlp_user_command = 'find %s -type f | grep -v "`cat .gitignore`"'
+let g:ctrlp_custom_ignore = '\v[\/](node_modules|build|dist)|(\.(swp|ico|git|svn))$'
 
 "No arrow keys
 nnoremap   <up>   <nop>
@@ -158,23 +179,25 @@ xnoremap <Leader>fr :call VisualFindAndReplaceWithSelection()<CR>
 
 "Spell check
 nnoremap <leader>sc :set spell spelllang=en_us<CR>
-nnoremap <leader>so :set nospell<CR>
+nnoremap <leader>ns :set nospell<CR>
 
 "Productivity
 inoremap jj <ESC>
 nnoremap d "_d
+nnoremap x "_x
 noremap <leader>s :w<CR>
+noremap <leader>q :q<CR>
 nnoremap <leader>w :wq<CR>
 nnoremap <leader>fq :q!<CR>
-nnoremap <leader>q :xa<CR>
+nnoremap <leader>Q :xa<CR>
 nnoremap <leader>u <C-r>
 nnoremap <leader>o :noh<CR>
-nnoremap <leader>F :grep -R  .<Left><Left>
 nnoremap <leader>f :/\c
 nnoremap <leader>v :e $MYVIMRC<CR>
 nnoremap <C-b> :b#<CR>
 nnoremap <leader>gg gg=G``<CR>
-nnoremap <leader>a ggVGy``
+nnoremap <leader>ay ggVGy``
+nnoremap <leader>ay ggVGy``
 
 " Git
 nnoremap <leader>GS :Git status<CR>
@@ -186,11 +209,15 @@ nnoremap <leader>GP :Git push
 " Rebuffer
 nnoremap <leader>br :bufdo e!<CR>
 
+" Tab Buffers
+nnoremap [ gT
+nnoremap ] gt
+
 " Quick Left and Right
 nnoremap <C-h> ^
 nnoremap <C-l> $
 
-" Easy toggling
+" Easy toggle
 nnoremap <leader>\ :NERDTreeToggle<CR>
 
 " Center n
@@ -205,6 +232,12 @@ nnoremap <leader>mh :vertical resize +5<CR>
 nnoremap <leader>ml :vertical resize -5<CR>
 nnoremap <leader>mj :resize +5<CR>
 nnoremap <leader>mk :resize -5<CR>
+
+" Ack
+nnoremap <Leader>F :tabnew <Bar> Ack<Space>
+" " And/or abbreviation
+abbr TAck tabnew <Bar> Ack
+" Split rightward so as not to displace a left NERDTree
 
 " Style
 function! ToggleDark()

@@ -59,6 +59,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
+Plugin 'posva/vim-vue'
 
 " Commenting
 let g:NERDSpaceDelims = 1
@@ -97,6 +98,9 @@ let g:UltiSnipsEditSplit="vertical"
 let g:jsx_pragma_required = 1
 autocmd BufRead,BufNewFile *.tsx setlocal filetype=typescript.tsx
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
+
+" Vue
+autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
 " Go Bindings
 set rtp+=$GOPATH/src/github.com/golang/lint/misc/vim

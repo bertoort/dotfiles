@@ -16,6 +16,7 @@ let mapleader="\<Space>"
 syntax on
 set shell=bash
 set number
+set gdefault
 set hlsearch
 set guifont=Menlo\ for\ Powerline
 filetype off                  " required
@@ -31,7 +32,9 @@ set splitbelow
 set clipboard^=unnamed
 set clipboard^=unnamedplus
 set wrap!
+set synmaxcol=200
 " set spell spelllang=en_us
+" set complete+=kspell
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -60,6 +63,16 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'leafgarland/typescript-vim'
 Plugin 'ianks/vim-tsx'
 Plugin 'posva/vim-vue'
+Plugin 'mattn/webapi-vim'
+Plugin 'mattn/gist-vim'
+Plugin 'wakatime/vim-wakatime'
+Plugin 'ap/vim-css-color'
+
+" Gist
+let g:gist_open_browser_after_post = 1
+
+" CSS Colors
+let g:cssColorVimDoNotMessMyUpdatetime = 1
 
 " Commenting
 let g:NERDSpaceDelims = 1
@@ -80,7 +93,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Add snippets inside a snippets file
 " .vim/bundle/vim-snippets/UltiSnips/html.snippets 
-"snippet html "HTML layout" w
+"snippet html "HTML layout"
 "<!DOCTYPE html>
 "<html>
 "	<head>
@@ -98,6 +111,14 @@ let g:UltiSnipsEditSplit="vertical"
 let g:jsx_pragma_required = 1
 autocmd BufRead,BufNewFile *.tsx setlocal filetype=typescript.tsx
 autocmd BufRead,BufNewFile *.ts setlocal filetype=typescript
+
+" ESLint
+" let g:syntastic_javascript_checkers = ['eslint']
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+"
+" let g:syntastic_check_on_wq = 0
 
 " Vue
 autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
@@ -258,4 +279,3 @@ nnoremap <leader>tt :call ToggleDark()<CR>
 set noruler
 set laststatus=2
 set statusline=%<\ %f\ %m%y%=%-35.(Line:\ %l\ of\ %L,\ Col:\ %c%V\ (%P)%)
-

@@ -1,5 +1,6 @@
 # ZSH Configuration
 
+export DATABASE_URL=postgres://localhost/dbname
 export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="agnoster"
 DISABLE_AUTO_UPDATE="true"
@@ -23,11 +24,10 @@ export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
-
 # rvm
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-# export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-# rvm user gemsets
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export PATH=$PATH:$HOME/.rvm/gems/ruby-2.4.0/bin 
+rvm user gemsets
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
